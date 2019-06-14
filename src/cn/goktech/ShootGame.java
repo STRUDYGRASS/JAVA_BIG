@@ -1,5 +1,7 @@
 package cn.goktech;
 
+import com.sun.source.tree.NewArrayTree;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,8 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class ShootGame extends JPanel {
 	public static int width = 400;
@@ -152,8 +153,8 @@ public class ShootGame extends JPanel {
 					removeObject();
 					// 6、判断子弹是否与敌机、小蜜蜂碰撞
 					flyObjectShutByBullet();
-
 					// 7、判断英雄机和敌机、小蜜蜂的碰撞
+					flyObjectShutByHero();
 					// 生命值-1，火力值恢复一发
 					// 8、判断英雄机的生命值改变游戏状态
 					if (hero.life == 0) {
@@ -290,6 +291,24 @@ public class ShootGame extends JPanel {
 
 	}
 
+	// 7、判断英雄机和敌机、小蜜蜂的碰撞
+	public void flyObjectShutByHero(){
+		List<FlyObject> tempFlyObjet = new ArrayList<FlyObject>();
+		for (FlyObject flyObject : flyings) {
+			if (hero.shut(flyObject)){
+				// 碰撞之后，飞机消失在面板，
+				tempFlyObjet.add(flyObject);
+				// 判断撞击的目标是小蜜蜂还是敌机？
+				if (flyObject instanceof AirPlane) {
+					hero.life--;
+				}
+			}
+		}
+		// 移除掉击中的对象
+		flyings.removeAll(tempFlyObjet);
+	}
+
+
 	@Override
 	public void paint(Graphics g) {
 		// 1、绘制背景图片
@@ -347,7 +366,9 @@ public class ShootGame extends JPanel {
 
 	public static void main(String[] args) {
 		ShootGame game = new ShootGame();
+		JPanel v = new JPanel();
 		JFrame jframe = new JFrame("飞机大战");
+
 		jframe.add(game);
 		jframe.setSize(ShootGame.width, ShootGame.height);
 		jframe.setLocationRelativeTo(null);

@@ -23,6 +23,19 @@ public class Hero extends FlyObject {
 		this.index = 0;
 		this.doubleFire = 0;
 	}
+	public boolean shut(FlyObject flyObject) {
+		int x1 = this.x;
+		int y1 = this.y;
+
+		int x2 = flyObject.x;
+		int y2 = flyObject.y;
+		if (x1 >= x2 && x1 <= x2 + flyObject.width) {
+			if (y1 >= y2 - flyObject.height && y1 <= y2) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public void move() {
@@ -57,5 +70,6 @@ public class Hero extends FlyObject {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 }
