@@ -42,6 +42,8 @@ public class ShootGame extends JPanel {
 	public static BufferedImage bee;
 	public static BufferedImage bullet;
 
+	private JFrame jframe = null;
+
 	Hero hero = new Hero();
 	// 创建List分别存放当前面板中存在敌机、小蜜蜂、子弹
 	List<FlyObject> flyings = new ArrayList<FlyObject>();
@@ -334,6 +336,9 @@ public class ShootGame extends JPanel {
 		switch (state) {
 		case START:
 			g.drawImage(start, 0, 0, null);
+			hero.life = 3;
+			hero.score = 0;
+			flyings.removeAll(flyings);
 			break;
 		case RUNNING:
 
@@ -363,19 +368,17 @@ public class ShootGame extends JPanel {
 		}
 
 	}
+public ShootGame(){
 
-	public static void main(String[] args) {
-		ShootGame game = new ShootGame();
-		JPanel v = new JPanel();
-		JFrame jframe = new JFrame("飞机大战");
+	jframe = new JFrame("飞机大战");
 
-		jframe.add(game);
-		jframe.setSize(ShootGame.width, ShootGame.height);
-		jframe.setLocationRelativeTo(null);
-		jframe.setResizable(true);
-		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jframe.setVisible(true);
-		game.action();
-	}
+	jframe.add(this);
+	jframe.setSize(ShootGame.width, ShootGame.height);
+	jframe.setLocationRelativeTo(null);
+	jframe.setResizable(true);
+	jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	jframe.setVisible(true);
+	this.action();
+}
 
 }
