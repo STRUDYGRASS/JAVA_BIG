@@ -20,11 +20,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class ShootGame extends JPanel {
-	public static int width = 400;
-	public static int height = 625;
+	public static int width = 600;
+	public static int height = 505;
 
 	// 表示当前的游戏状态
-	public int state = 3;
+	public int state = 0;
 	// 表示这个游戏过程中存在的四种状态
 	public final static int START = 0;
 	public final static int RUNNING = 1;
@@ -33,8 +33,6 @@ public class ShootGame extends JPanel {
 
 	// 静态资源
 	public static BufferedImage background;
-	public static BufferedImage start;
-	public static BufferedImage pause;
 	public static BufferedImage gameover;
 	public static BufferedImage hero0;
 	public static BufferedImage hero1;
@@ -53,12 +51,10 @@ public class ShootGame extends JPanel {
 	static {
 		// 初始化静态图片
 		try {
-			background = ImageIO.read(new File("iamge/background.png"));
-			start = ImageIO.read(new File("iamge/start.png"));
-			pause = ImageIO.read(new File("iamge/pause.png"));
+			background = ImageIO.read(new File("iamge/bg.png"));
 			gameover = ImageIO.read(new File("iamge/gameover.png"));
-			hero0 = ImageIO.read(new File("iamge/hero0.png"));
-			hero1 = ImageIO.read(new File("iamge/hero1.png"));
+			hero0 = ImageIO.read(new File("iamge/cxk1.png"));
+			hero1 = ImageIO.read(new File("iamge/cxk2.png"));
 			airplane = ImageIO.read(new File("iamge/airplane.png"));
 			bee = ImageIO.read(new File("iamge/bee.png"));
 			bullet = ImageIO.read(new File("iamge/bullet.png"));
@@ -136,18 +132,15 @@ public class ShootGame extends JPanel {
 		this.addMouseMotionListener(adapter);
 
 		// 定时器周期性产生敌机与小蜜蜂、子弹
-
 		Timer timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
-
 			@Override
 			public void run() {
 				if (state == RUNNING) {
 					// 1、负责敌机与小蜜蜂的产生
 					flyObjectAction();
 					// 2、负责敌机与小蜜蜂、子弹、英雄机的移动
-					flyobjectMove();
-					// 3、负责子弹的产生
+					flyobjectMove();// 3、负责子弹的产生
 					bulletAction();
 					// 4、负责子弹的移动
 					bulletMove();
@@ -335,7 +328,6 @@ public class ShootGame extends JPanel {
 	private void paintForeground(Graphics g) {
 		switch (state) {
 		case START:
-			g.drawImage(start, 0, 0, null);
 			hero.life = 3;
 			hero.score = 0;
 			flyings.removeAll(flyings);
@@ -344,10 +336,9 @@ public class ShootGame extends JPanel {
 
 			break;
 		case PAUSE:
-			g.drawImage(pause, 0, 0, null);
 			break;
 		case GAMEOVER:
-			g.drawImage(gameover, 0, 0, null);
+			g.drawImage(gameover, 50, 200, null);
 			break;
 		}
 
