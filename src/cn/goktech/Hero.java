@@ -12,8 +12,8 @@ public class Hero extends FlyObject {
 	int index;// 让其0、1来回切换，根据0或者1获取数组images的图片进行显示
 
 	public Hero() {
-		this.x = 170;
-		this.y = 400;
+		this.x = 270;
+		this.y = 300;
 		this.image = ShootGame.hero0;// 游戏开始前画面显示英雄机的图片
 		this.width = image.getWidth();
 		this.height = image.getHeight();
