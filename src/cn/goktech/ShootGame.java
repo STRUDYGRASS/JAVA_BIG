@@ -362,12 +362,10 @@ public class ShootGame extends JPanel {
 public ShootGame(){
 
 	jframe = new JFrame("飞机大战");
-
 	jframe.add(this);
 	jframe.setSize(ShootGame.width, ShootGame.height);
 	jframe.setLocationRelativeTo(null);
-	jframe.setResizable(true);
-	jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	jframe.setResizable(false);
 	jframe.setVisible(true);
 	this.action();
 }
