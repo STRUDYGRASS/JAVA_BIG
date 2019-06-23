@@ -33,8 +33,8 @@ public class SystemLog extends JFrame {
         login.addActionListener(actionListener);
         reset.addActionListener(actionListener);
 
-        JLabel a = new JLabel("用户名： ");
-        JLabel b = new JLabel("密码： ");
+        JLabel a = new JLabel("用户:");
+        JLabel b = new JLabel("密码:");
         JLabel log_image = new JLabel("");
         JPanel admin = new JPanel(),pass = new JPanel(),butt = new JPanel();
         admin.add(a);
@@ -43,7 +43,7 @@ public class SystemLog extends JFrame {
         pass.add(passwd);
         butt.add(login);
         butt.add(reset);
-        LogContainer.add(log_image,BorderLayout.NORTH);
+//        LogContainer.add(log_image,BorderLayout.NORTH);
         LogContainer.add(admin);
         LogContainer.add(pass);
         LogContainer.add(butt,BorderLayout.SOUTH);
@@ -73,6 +73,10 @@ public class SystemLog extends JFrame {
                 else{
                     JOptionPane.showMessageDialog(null,"用户名和密码错误!");
                 }
+            }
+            else if (jb == reset){
+                passwd.setText(null);
+                usname.setText(null);
             }
         }
     };
