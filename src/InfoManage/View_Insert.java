@@ -43,10 +43,17 @@ public class View_Insert extends View_Student implements ActionListener {
                 }else{
                     student.setSex("女");
                 }
+
+                boolean mark = true;
                 try {
                     StudentInfo.insert(student);
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null,"插入失败！!");
+                    mark = false;
+                }
+                if (mark) {
+                    JOptionPane.showMessageDialog(null, "插入数据成功！!");
                 }
             }
         }
