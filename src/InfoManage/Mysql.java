@@ -17,7 +17,7 @@ public class Mysql {
     }
 
     //关闭数据库连接
-    public void closeCon(Connection con)throws Exception{
+    public static void closeCon(Connection con)throws Exception{
         if(con!=null){
             con.close();
         }

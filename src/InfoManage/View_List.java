@@ -1,9 +1,8 @@
 package InfoManage;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 public class View_List extends JPanel {
@@ -36,8 +35,8 @@ public class View_List extends JPanel {
         try {
 
             list = StudentInfo.select();
-            Vector hang = new Vector();
             while (list.next()) {
+                Vector hang = new Vector();
                 hang.add(list.getInt(1));
                 hang.add(list.getString(2));
                 hang.add(list.getString(3));
@@ -48,7 +47,16 @@ public class View_List extends JPanel {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if(list!=null){
+                    list.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
         jt = new JTable(info, tablehead); //建立学籍表
         jsp = new JScrollPane(jt);
     }
