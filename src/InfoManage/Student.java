@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 public class Student {
     private int Account;
     private String Name;
-    private char Sex;
+    private String Sex;
     private String Major;
     private int CLass;
     private String date; //用了string
@@ -19,7 +19,7 @@ public class Student {
         return Name;
     }
 
-    public char getSex(){
+    public String getSex(){
         return Sex;
     }
 
@@ -43,7 +43,7 @@ public class Student {
         this.Name = name;
     }
 
-    public void setSex(char sex){
+    public void setSex(String sex){
         this.Sex = sex;
     }
 
@@ -58,5 +58,6 @@ public class Student {
     public void setDate(String date){
         this.date=date;
     }
+
 
 }

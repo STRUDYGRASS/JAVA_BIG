@@ -32,7 +32,22 @@ public class View_Insert extends View_Student implements ActionListener {
                 JOptionPane.showMessageDialog(null,"输入格式错误!");
             }
             else {
-                //录入该信息
+                Student student = new Student();
+                student.setAccount(Integer.parseInt(this.tx_account.getText()));
+                student.setName(this.tx_name.getText());
+                student.setMajor(this.tx_major.getText());
+                student.setCLass(Integer.parseInt(this.tx_class.getText()));
+                student.setDate(this.tx_date.getText());
+                if(this.sman.isSelected()){
+                    student.setSex("男");
+                }else{
+                    student.setSex("女");
+                }
+                try {
+                    StudentInfo.insert(student);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         }
         else if (e.getSource() == btn_clean){

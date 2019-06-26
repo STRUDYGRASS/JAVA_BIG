@@ -3,10 +3,12 @@ package InfoManage;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class View_Query extends View_Student implements ActionListener {
 
     private JButton btn_search = null;
+    private ResultSet rs;
     public View_Query(){
         this.AccountLabel.setText("enter account to search:");
         btn_search = new JButton("查询");
@@ -29,6 +31,20 @@ public class View_Query extends View_Student implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_search) {
+            try {
+                rs=StudentInfo.select(Integer.parseInt(this.tx_account.getText()));
+                this.tx_name.setText(rs.getString(2));
+                this.tx_major.setText(rs.getString(4));
+                this.tx_class.setText(String.valueOf(rs.getInt(5)));
+                this.tx_date.setText(rs.getString(6));
+                if(rs.getString(3)=="男"){
+                    this.sman.setSelected(true);
+                }else {
+                    this.swoman.setSelected(true);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             //查询操作，并创建一个Student类把数值依次赋值到各个text中
             //如未找到
 //            JOptionPane.showMessageDialog(null,"查无此人!");

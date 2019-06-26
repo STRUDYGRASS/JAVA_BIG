@@ -19,6 +19,7 @@ public class InfoSystem extends JFrame implements ActionListener {
             HM_About;
     private Container container = null;
     public static CardLayout card = null;
+    private View_List viewlist = null;
 
 
     public InfoSystem(){
@@ -78,10 +79,11 @@ public class InfoSystem extends JFrame implements ActionListener {
 
         container.add(new JPanel(),"main"); //背景照片jpanel设置地点
 
+        viewlist = new View_List();
         container.add(new View_Insert(),"ins");
         container.add(new View_Modify(),"mod");
         container.add(new View_Delete(),"del");
-        container.add(new View_List(),"lis");
+        container.add(viewlist,"lis");
         container.add(new View_Query(),"que");
         //container中add jpanel，然后用card show切换
 
@@ -112,6 +114,7 @@ public class InfoSystem extends JFrame implements ActionListener {
         }
         else if (e.getSource() == EM_List){
             card.show(container,"lis");
+            viewlist.ListInit();
         }
         else if (e.getSource() == HM_About){
             JOptionPane.showMessageDialog(null,"学籍管理系统v1.0");
