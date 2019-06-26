@@ -114,7 +114,7 @@ public class InfoSystem extends JFrame implements ActionListener {
         }
         else if (e.getSource() == EM_List){
             card.show(container,"lis");
-            viewlist.ListInit();
+
         }
         else if (e.getSource() == HM_About){
             JOptionPane.showMessageDialog(null,"学籍管理系统v1.0");
